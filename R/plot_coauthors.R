@@ -21,7 +21,7 @@ plot_coauthors <- function(network) {
     ggraph::ggraph(layout = 'kk') +
     ggraph::geom_edge_link(ggplot2::aes_string(alpha = '..index..', color = as.character('from')), alpha = 1/3, show.legend = FALSE) +
     ggraph::geom_node_point(ggplot2::aes_string(size = 'closeness'), alpha = 1/2, show.legend = FALSE) +
-    ggraph::geom_node_text(ggplot2::aes_string(label = 'name'), size = 3, repel = TRUE, check_overlap = TRUE) +
+    ggraph::geom_node_text(ggplot2::aes_string(label = 'name'), size = 5, repel = TRUE, check_overlap = TRUE) +
     ggplot2::labs(title = glue::glue("Network of coauthorship of {network$author[1]}")) +
     ggraph::theme_graph(title_size = 16)
 }
