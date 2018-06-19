@@ -27,14 +27,14 @@ devtools::install_github("cimentadaj/coauthornetwork")
 ```
 ## Example
 
-The package only has two functions: `grab_network` to extract the network of coauthors and `plot_coauthors` to plot the network as a `ggraph`. The only thing you need is the string in the Google Scholar profile after the root of the website. For example, a Google Scholar profile URL is typically structured like this `https://scholar.google.es/citations?user=wKNoabEAAAAJ&hl=en&oi=ao`. `grab_network` will accept the end of the URL: `citations?user=wKNoabEAAAAJ&hl=en&oi=ao` and search for the network of coauthors.
+The package only has two functions: `grab_network` to extract the network of coauthors and `plot_coauthors` to plot the network as a `ggraph`. The only thing you need is the string in the Google Scholar profile after the root of the website. For example, a Google Scholar profile URL is typically structured like this `https://scholar.google.es/citations?user=amYIKXQAAAAJ&hl=en`. `grab_network` will accept the end of the URL: `citations?user=amYIKXQAAAAJ&hl=en` and search for the network of coauthors.
 
 A basic example:
 
 ```{r example}
 library(coauthornetwork)
 
-final_network <- grab_network('citations?user=wKNoabEAAAAJ&hl=en&oi=ao')
+final_network <- grab_network('citations?user=amYIKXQAAAAJ&hl=en', n_coauthors = 5)
 plot_coauthors(final_network)
 ```
 
@@ -44,7 +44,7 @@ Google Scholar Profile -- > Coauthors --> Coauthors --> Coauthors
 
 I urge the user to use an `n_deep` of 2 at most because the network can grow exponentially with an `n_deep` of 2 or above. For example..
 
-```{r pressure, echo = FALSE}
-final_network <- grab_network('citations?user=wKNoabEAAAAJ&hl=en&oi=ao', n_deep = 2)
+```{r pressure}
+final_network <- grab_network('citations?user=amYIKXQAAAAJ&hl=en', n_coauthors = 10, n_deep = 2)
 plot_coauthors(final_network)
 ```

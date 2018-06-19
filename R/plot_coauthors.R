@@ -8,14 +8,14 @@
 #' @examples
 #'
 #' \dontrun{
-#' final_network <- grab_network('citations?user=wKNoabEAAAAJ&hl=en&oi=ao')
+#' final_network <- grab_network('citations?user=amYIKXQAAAAJ&hl=en')
 #' plot_coauthors(final_network)
 #' }
 plot_coauthors <- function(network) {
   graph <-
     network[c("author", "coauthors")] %>%
     tidygraph::as_tbl_graph() %>%
-    tidygraph::mutate(closeness = tidygraph::centrality_closeness())
+    tidygraph::mutate(closeness = suppressWarnings(tidygraph::centrality_closeness()))
 
   graph %>%
     ggraph::ggraph(layout = 'kk') +

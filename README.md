@@ -22,9 +22,9 @@ network of coauthors and `plot_coauthors` to plot the network as a
 `ggraph`. The only thing you need is the string in the Google Scholar
 profile after the root of the website. For example, a Google Scholar
 profile URL is typically structured like this
-`https://scholar.google.es/citations?user=wKNoabEAAAAJ&hl=en&oi=ao`.
+`https://scholar.google.es/citations?user=amYIKXQAAAAJ&hl=en`.
 `grab_network` will accept the end of the URL:
-`citations?user=wKNoabEAAAAJ&hl=en&oi=ao` and search for the network of
+`citations?user=amYIKXQAAAAJ&hl=en` and search for the network of
 coauthors.
 
 A basic example:
@@ -32,7 +32,7 @@ A basic example:
 ``` r
 library(coauthornetwork)
 
-final_network <- grab_network('citations?user=wKNoabEAAAAJ&hl=en&oi=ao')
+final_network <- grab_network('citations?user=amYIKXQAAAAJ&hl=en', n_coauthors = 5)
 plot_coauthors(final_network)
 ```
 
@@ -47,6 +47,12 @@ to this:
 Google Scholar Profile – \> Coauthors –\> Coauthors –\> Coauthors
 
 I urge the user to use an `n_deep` of 2 at most because the network can
-grow exponentially with an `n_deep` of 2 or above. For example..
+grow exponentially with an `n_deep` of 2 or above. For
+example..
+
+``` r
+final_network <- grab_network('citations?user=amYIKXQAAAAJ&hl=en', n_coauthors = 10, n_deep = 2)
+plot_coauthors(final_network)
+```
 
 <img src="man/figures/README-pressure-1.png" width="100%" />

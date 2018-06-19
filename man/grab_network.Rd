@@ -4,11 +4,14 @@
 \alias{grab_network}
 \title{Grab a network of coauthors from Google Scholar profile}
 \usage{
-grab_network(scholar_id, n_deep = 1)
+grab_network(scholar_id, n_coauthors = 5, n_deep = 1)
 }
 \arguments{
-\item{scholar_id}{The endline of a google scholar profile. For example, 'citations?user=wKNoabEAAAAJ&hl=en&oi=ao' comes
-from the profile https://scholar.google.com/citations?user=wKNoabEAAAAJ&hl=en&oi=ao}
+\item{scholar_id}{The endline of a google scholar profile. For example, 'citations?user=amYIKXQAAAAJ&hl=en' comes
+from the profile https://scholar.google.com/citations?user=amYIKXQAAAAJ&hl=en}
+
+\item{n_coauthors}{Number of coauthors to explore. This number should usually be between 1 and 10 as
+choosing many coauthors can make the network graph too messy.}
 
 \item{n_deep}{The number of degrees that you want to go down the network. When \code{n_deep} is equal to \code{1}
 then \code{grab_network} will only grab the coauthors of Joe and Mary, so Joe -- > Mary --> All coauthors. This can get
@@ -25,7 +28,7 @@ Grab a network of coauthors from Google Scholar profile
 
 \dontrun{
 
-final_network <- grab_network('citations?user=wKNoabEAAAAJ&hl=en&oi=ao')
+final_network <- grab_network('citations?user=amYIKXQAAAAJ&hl=en')
 plot_coauthors(final_network)
 
 }
