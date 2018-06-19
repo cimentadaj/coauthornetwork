@@ -75,11 +75,13 @@ get_coauthors <- function(scholar_id, n_coauthors) {
   # Do no grab the text of the node yet because I need to grab the
   # href below.
   coauthors <- xml2::xml_find_all(google_scholar,
-                            xpath = "//a[@tabindex = '-1']")[seq_len(n_coauthors)]
+                            xpath = "//a[@tabindex = '-1']")
 
-  coauthor_href <- xml2::xml_attr(coauthors, "href")
+  subset_coauthors <- if (n_coauthors > length(coauthors)) TRUE else seq_len(n_coauthors)
 
-  coauthors <- xml2::xml_text(coauthors)
+  coauthor_href <- xml2::xml_attr(coauthors[subset_coauthors], "href")
+
+  coauthors <- xml2::xml_text(coauthors)[subset_coauthors]
 
   # If the person has no coauthors, return empty
   if (length(coauthor_href) == 0) {
