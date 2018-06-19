@@ -4,10 +4,12 @@
 \alias{plot_coauthors}
 \title{Plot a network of coauthors}
 \usage{
-plot_coauthors(network)
+plot_coauthors(network, size_labels = 5)
 }
 \arguments{
 \item{network}{A data frame given by \code{grab_network}}
+
+\item{size_labels}{Size of the label names}
 }
 \value{
 a \code{ggplot2} object but prints a plot as a side effect.
