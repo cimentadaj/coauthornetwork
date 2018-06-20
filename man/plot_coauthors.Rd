@@ -20,6 +20,8 @@ Plot a network of coauthors
 \examples{
 
 \dontrun{
+library(coauthornetwork)
+
 final_network <- grab_network('citations?user=amYIKXQAAAAJ&hl=en')
 plot_coauthors(final_network)
 }
