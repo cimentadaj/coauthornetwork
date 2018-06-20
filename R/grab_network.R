@@ -41,6 +41,29 @@ grab_network <- function(scholar_id, n_coauthors = 5, n_deep = 1) {
   final_network
 }
 
+# Recursively try to GET Google Scholar Page
+get_resp <- function(url, attempts_left = max_attempts) {
+
+  stopifnot(attempts_left > 0)
+
+  resp <- httr::GET(url)
+
+  # On a successful GET, return the response
+  if (httr::status_code(resp) == 200) {
+    resp
+  }
+
+  # When attempts run out, stop with an error
+  else if (attempts_left == 1) {
+    stop("Cannot connect to Google Scholar. Is the URL you provided correct?")
+  }
+
+  # Otherwise, sleep a second and try again
+  else {
+    Sys.sleep(1)
+    get_resp(url, attempts_left - 1)
+  }
+}
 
 get_coauthors <- function(scholar_id, n_coauthors) {
 
@@ -51,26 +74,7 @@ get_coauthors <- function(scholar_id, n_coauthors) {
                   coauthors_href = character()))
   }
 
-  max_attempts <- 5
-
-  # Recursively try to GET Google Scholar Page
-  get_resp <- function(url, attempts_left = max_attempts) {
-    stopifnot(attempts_left > 0)
-    resp <- httr::GET(url)
-    # On a successful GET, return the response
-    if (httr::status_code(resp) == 200) {
-      resp
-      # When attempts run out, stop with an error
-    } else if (attempts_left == 1) {
-      stop("Cannot connect to Google Scholar. Is the URL you provided correct?")
-      # Otherwise, sleep a second and try again
-    } else {
-      Sys.sleep(1)
-      get_resp(url, attempts_left - 1)
-    }
-  }
-
-  resp <- get_resp(glue::glue("https://scholar.google.es/{scholar_id}"))
+  resp <- get_resp(paste0("https://scholar.google.es/", scholar_id), 5)
 
   google_scholar <- httr::content(resp)
 
