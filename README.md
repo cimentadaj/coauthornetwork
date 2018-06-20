@@ -33,7 +33,7 @@ A basic example:
 library(coauthornetwork)
 
 final_network <- grab_network('citations?user=amYIKXQAAAAJ&hl=en', n_coauthors = 5)
-plot_coauthors(final_network)
+plot_coauthors(final_network, size_labels = 3)
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
@@ -52,7 +52,7 @@ example..
 
 ``` r
 final_network <- grab_network('citations?user=amYIKXQAAAAJ&hl=en', n_coauthors = 10, n_deep = 2)
-plot_coauthors(final_network)
+plot_coauthors(final_network, size_labels = 3)
 ```
 
 <img src="man/figures/README-pressure-1.png" width="100%" />

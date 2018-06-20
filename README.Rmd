@@ -35,7 +35,7 @@ A basic example:
 library(coauthornetwork)
 
 final_network <- grab_network('citations?user=amYIKXQAAAAJ&hl=en', n_coauthors = 5)
-plot_coauthors(final_network)
+plot_coauthors(final_network, size_labels = 3)
 ```
 
 `grab_network` has an additional argument called `n_deep` which controls the degree of depth in which to go down the coauthorship list. An `n_deep` of 1 (default) will grab all of the coauthors of the Google Scholar profile and also their coauthors. An `n_deep` of 2 will expand to this:
@@ -46,5 +46,5 @@ I urge the user to use an `n_deep` of 2 at most because the network can grow exp
 
 ```{r pressure}
 final_network <- grab_network('citations?user=amYIKXQAAAAJ&hl=en', n_coauthors = 10, n_deep = 2)
-plot_coauthors(final_network)
+plot_coauthors(final_network, size_labels = 3)
 ```
