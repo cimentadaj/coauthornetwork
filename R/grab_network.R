@@ -43,7 +43,7 @@ grab_network <- function(scholar_id, n_coauthors = 5, n_deep = 1) {
 }
 
 # Recursively try to GET Google Scholar Page
-get_resp <- function(url, attempts_left = max_attempts) {
+get_resp <- function(url, attempts_left = 5) {
 
   stopifnot(attempts_left > 0)
 
