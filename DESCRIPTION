@@ -3,6 +3,8 @@ Version: 0.1.0.9000
 Title: Grab and visualize a network of coauthors for a given Google Scholar profile
 Description: Easily scrape data on all coauthors of a Google Scholar profile and visualize their network of collaborations. These functions allow a fine grained control of how many coauthors you wish to extract as well as the degree of depth that you want to dive into the autho-coauthor network.
 Authors@R: person("Jorge", "Cimentada", , "cimentadaj@gmail.com", c("aut", "cre"))
+Author: Jorge Cimentada [aut, cre],
+  Max Czapanskiy [ctb]
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
