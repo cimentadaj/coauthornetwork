@@ -84,7 +84,7 @@ get_coauthors <- function(scholar_id, n_coauthors) {
 
   author_name <- google_scholar %>%
     xml2::xml_find_all(xpath = "//div[@id = 'gsc_prf_in']") %>%
-    xml2::xml_text
+    xml2::xml_text()
 
   # Do no grab the text of the node yet because I need to grab the
   # href below.
