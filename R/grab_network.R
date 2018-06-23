@@ -9,6 +9,9 @@
 #' out of control very quickly if \code{n_deep} is set to \code{2} or above. The preferred number is \code{1}, the default.
 #'
 #' @return A \code{tibble} with the all authors and coauthors.
+#'
+#' @importFrom dplyr %>%
+#'
 #' @export
 #'
 #' @examples
@@ -70,29 +73,26 @@ get_coauthors <- function(scholar_id, n_coauthors) {
 
   if (scholar_id == "") {
     return(
-      tidygraph::as_tibble(
-        data.frame(author = character(),
-                  href = character(),
-                  coauthors = character(),
-                  coauthors_href = character())
-        )
-      )
+      dplyr::tibble(
+        author = character(),
+        href = character(),
+        coauthors = character(),
+        coauthors_href = character())
+    )
   }
 
   resp <- get_resp(paste0("https://scholar.google.es/", scholar_id), 5)
 
   google_scholar <- httr::content(resp)
 
-  author_name <-
-    xml2::xml_text(
-      xml2::xml_find_all(google_scholar,
-                         xpath = "//div[@id = 'gsc_prf_in']")
-      )
+  author_name <- google_scholar %>%
+    xml2::xml_find_all(xpath = "//div[@id = 'gsc_prf_in']") %>%
+    xml2::xml_text()
 
   # Do no grab the text of the node yet because I need to grab the
   # href below.
   coauthors <- xml2::xml_find_all(google_scholar,
-                            xpath = "//a[@tabindex = '-1']")
+                                  xpath = "//a[@tabindex = '-1']")
 
   subset_coauthors <- if (n_coauthors > length(coauthors)) TRUE else seq_len(n_coauthors)
 
@@ -106,13 +106,11 @@ get_coauthors <- function(scholar_id, n_coauthors) {
     coauthor_href <- ""
   }
 
-  tidygraph::as_tibble(
-    data.frame(
+  dplyr::tibble(
     author = author_name,
     href = scholar_id,
     coauthors = coauthors,
     coauthors_href = coauthor_href
-    )
   )
 }
 

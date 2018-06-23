@@ -15,5 +15,6 @@ Imports:
     purrr,
     ggraph,
     tidygraph,
-    ggplot2
+    ggplot2,
+    dplyr
 RoxygenNote: 6.0.1
